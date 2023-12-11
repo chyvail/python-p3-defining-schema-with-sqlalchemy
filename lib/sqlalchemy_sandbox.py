@@ -1,12 +1,23 @@
 #!/usr/bin/env python3
 
+# imports
 from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 
-Base = declarative_base()
-
-class Student(Base):
+class Base(DeclarativeBase): # declarative base / A parent object 
     pass
 
-if __name__ == '__main__':
-    pass
+
+# This type of class is called a data model
+class Student(Base): # Needs to inherit from base object
+    
+    # table name as a class attribute
+    __tablename__ = 'students'
+
+    # Columns as class attributes with one as a PK
+    id = Column(Integer(), primary_key=True)
+    name = Column(String())
+
+if __name__ == '__main__': # nice trick 
+    engine = create_engine('sqlite:///students.db') # the engine point to local sqlite url file where db will be created
+    Base.metadata.create_all(engine) # Tells engine that any models were created using base as parent 
