@@ -18,6 +18,7 @@ class Student(Base): # Needs to inherit from base object
     id = Column(Integer(), primary_key=True)
     name = Column(String())
 
-if __name__ == '__main__': # nice trick 
+if __name__ == '__main__': # nice trick, so this executes only when the script is run directly
+    
     engine = create_engine('sqlite:///students.db') # the engine point to local sqlite url file where db will be created
     Base.metadata.create_all(engine) # Tells engine that any models were created using base as parent 
